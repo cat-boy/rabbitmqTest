@@ -6,7 +6,7 @@ import com.rabbitmq.client.Connection;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-
+/*** 先 启动生产者创建交换机 ***/
 public class Send {
 
     private static final String EXCHANGE_NAME = "test_exchange_fanout";
@@ -17,10 +17,10 @@ public class Send {
         //声明交换机
         channel.exchangeDeclare(EXCHANGE_NAME,"fanout");//分发
         //发送消息
-        String msg = "hello ps";
+        String msgFanout = "hello ps fanout";
 
-        channel.basicPublish(EXCHANGE_NAME,"",null,msg.getBytes());
-        System.out.println("Send :"+msg);
+        channel.basicPublish(EXCHANGE_NAME,"",null,msgFanout.getBytes());
+        System.out.println("Send :"+msgFanout);
 
         channel.close();
         connection.close();
